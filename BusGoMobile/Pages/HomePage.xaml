@@ -439,6 +439,7 @@
         </ScrollView>
 
         <!-- ALT NAVBAR -->
+        <!-- ALT NAVBAR -->
         <controls:BottomNavBar Grid.Row="2" ActiveTab="home" />
     </Grid>
 </ContentPage>
