@@ -6,7 +6,7 @@
 
     <ShellContent
         Title="Giriş"
-        ContentTemplate="{DataTemplate pages:LoginPage}"
-        Route="LoginPage" />
+        ContentTemplate="{DataTemplate pages:HomePage}"
+        Route="HomePage" />
 
 </Shell>

@@ -22,6 +22,18 @@
     <x:String x:Key="IconAlternateEmail">&#xe0e6;</x:String>
     <x:String x:Key="IconPhoneIphone">&#xe325;</x:String>
 
+    <x:String x:Key="IconStar">&#xe838;</x:String>
+    <x:String x:Key="IconFlight">&#xe539;</x:String>
+    <x:String x:Key="IconHotel">&#xe53a;</x:String>
+    <x:String x:Key="IconCar">&#xe531;</x:String>
+    <x:String x:Key="IconTripOrigin">&#xe57b;</x:String>
+    <x:String x:Key="IconCalendar">&#xe935;</x:String>
+    <x:String x:Key="IconPerson">&#xe7fd;</x:String>
+    <x:String x:Key="IconVerified">&#xef76;</x:String>
+    <x:String x:Key="IconConfirmationNumber">&#xe638;</x:String>
+    <x:String x:Key="IconHistory">&#xe889;</x:String>
+
+
 
 
 </ResourceDictionary>

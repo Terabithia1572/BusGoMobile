@@ -30,6 +30,7 @@ namespace BusGoMobile
             builder.Services.AddSingleton<BusGoMobile.Services.DatabaseService>();
             builder.Services.AddTransient<BusGoMobile.Pages.RegisterPage>();
             builder.Services.AddTransient<BusGoMobile.Pages.LoginPage>();
+            builder.Services.AddTransient<BusGoMobile.Pages.HomePage>();
 
 
 #endif
