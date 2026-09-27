@@ -29,6 +29,8 @@ namespace BusGoMobile
             builder.Logging.AddDebug();
             builder.Services.AddSingleton<BusGoMobile.Services.DatabaseService>();
             builder.Services.AddTransient<BusGoMobile.Pages.RegisterPage>();
+            builder.Services.AddTransient<BusGoMobile.Pages.LoginPage>();
+
 
 #endif
 

@@ -5,8 +5,8 @@
        x:Class="BusGoMobile.AppShell">
 
     <ShellContent
-        Title="Kayıt"
-        ContentTemplate="{DataTemplate pages:RegisterPage}"
-        Route="RegisterPage" />
+        Title="Giriş"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="LoginPage" />
 
 </Shell>

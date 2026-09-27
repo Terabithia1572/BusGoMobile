@@ -19,5 +19,9 @@
     <x:String x:Key="IconVerifiedUser">&#xe8e8;</x:String>
     <x:String x:Key="IconCheck">&#xe5ca;</x:String>
 
+    <x:String x:Key="IconAlternateEmail">&#xe0e6;</x:String>
+    <x:String x:Key="IconPhoneIphone">&#xe325;</x:String>
+
+
 
 </ResourceDictionary>
