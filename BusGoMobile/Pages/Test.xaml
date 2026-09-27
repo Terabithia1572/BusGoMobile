@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BusGoMobile.Pages.Test"
+             Title="Test">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Bilet Sorgulama"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Adınız:" />
+            <Entry Placeholder="Adınızı girin" />
+
+            <Label Text="Nereden:" />
+            <Entry Placeholder="Kalkış şehri" />
+
+            <Label Text="Nereye:" />
+            <Entry Placeholder="Varış şehri" />
+
+            <Label Text="Yolcu Sayısı:" />
+            <Entry Placeholder="Örn: 2"
+                   Keyboard="Numeric" />
+
+            <Button Text="Sorgula" />
+
+            <Label Text=""
+                   FontSize="16"
+                   TextColor="Green"
+                   HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
