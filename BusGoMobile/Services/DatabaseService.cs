@@ -7,7 +7,7 @@ public class DatabaseService
 {
     private SQLiteAsyncConnection _db;
 
-    private const string DbFileName = "busgo.db3";
+    private const string DbFileName = "BusGoDb.db";
 
     // Bağlantıyı hazırla: gömülü dosyayı yazılabilir klasöre kopyala, sonra bağlan
     private async Task InitAsync()
