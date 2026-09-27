@@ -4,33 +4,25 @@
              x:Class="BusGoMobile.Pages.Test"
              Title="Test">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Label Text="Bilet Sorgulama"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+            <!-- Inter font testi -->
+            <Label Text="Inter Regular yazı"
+               FontFamily="InterRegular" FontSize="18" />
+            <Label Text="Inter Bold yazı"
+               FontFamily="InterBold" FontSize="18" />
+            <Label Text="Inter ExtraBold yazı"
+               FontFamily="InterExtraBold" FontSize="18" />
 
-            <Label Text="Adınız:" />
-            <Entry Placeholder="Adınızı girin" />
-
-            <Label Text="Nereden:" />
-            <Entry Placeholder="Kalkış şehri" />
-
-            <Label Text="Nereye:" />
-            <Entry Placeholder="Varış şehri" />
-
-            <Label Text="Yolcu Sayısı:" />
-            <Entry Placeholder="Örn: 2"
-                   Keyboard="Numeric" />
-
-            <Button Text="Sorgula" />
-
-            <Label Text=""
-                   FontSize="16"
-                   TextColor="Green"
-                   HorizontalOptions="Center" />
+            <!-- Material Symbols ikon testi -->
+            <Label Text="&#xe530;"
+               FontFamily="MaterialSymbols" FontSize="40" />
+            <Label Text="&#xe8b6;"
+               FontFamily="MaterialSymbols" FontSize="40" />
+            <Label Text="&#xe0c8;"
+               FontFamily="MaterialSymbols" FontSize="40" />
 
         </VerticalStackLayout>
+
     </ScrollView>
 </ContentPage>

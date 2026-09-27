@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <x:String x:Key="IconBus">&#xe530;</x:String>
+    <x:String x:Key="IconNotifications">&#xe7f4;</x:String>
+    <x:String x:Key="IconSearch">&#xe8b6;</x:String>
+    <x:String x:Key="IconEvent">&#xe878;</x:String>
+    <x:String x:Key="IconLocationOn">&#xe0c8;</x:String>
+    <x:String x:Key="IconChevronRight">&#xe5cc;</x:String>
+    <x:String x:Key="IconArrowForward">&#xe5c8;</x:String>
+    <x:String x:Key="IconHelp">&#xe8fd;</x:String>
+
+</ResourceDictionary>
