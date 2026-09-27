@@ -57,4 +57,18 @@
     <Color x:Key="BgSurfaceContainerHighest">#d3e4fe</Color>
     <Color x:Key="BgOutlineVariant">#c6c6cd</Color>
 
+    <!-- ===== Sefer Listesi ek renkleri ===== -->
+    <Color x:Key="BgPrimary">#131b2e</Color>
+    <Color x:Key="BgOnPrimary">#ffffff</Color>
+    <Color x:Key="BgSurfaceContainer">#e5eeff</Color>
+    <Color x:Key="BgOutline">#76777d</Color>
+    <Color x:Key="BgSecondaryFixedDim">#ffb599</Color>
+    <Color x:Key="BgOnSecondaryContainer">#571a00</Color>
+    <Color x:Key="BgPamukkale">#b91c1c</Color>
+    <Color x:Key="BgKamilKoc">#1e40af</Color>
+    <Color x:Key="BgMetro">#dc2626</Color>
+    <Color x:Key="BgEmerald">#059669</Color>
+    <Color x:Key="BgEmeraldText">#047857</Color>
+
+
 </ResourceDictionary>

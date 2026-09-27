@@ -6,7 +6,7 @@
 
     <ShellContent
         Title="Ana Sayfa"
-        ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="HomePage" />
+        ContentTemplate="{DataTemplate pages:SearchPage}"
+        Route="SearchPage" />
 
 </Shell>
