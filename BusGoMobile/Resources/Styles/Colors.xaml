@@ -27,6 +27,8 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
+   
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
@@ -41,4 +43,18 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- ===== BusGo Tasarım Renkleri ===== -->
+    <Color x:Key="BgSurface">#f8f9ff</Color>
+    <Color x:Key="BgSecondary">#a73a00</Color>
+    <Color x:Key="BgSecondaryContainer">#fd651e</Color>
+    <Color x:Key="BgOnSecondary">#ffffff</Color>
+    <Color x:Key="BgOnSurface">#0b1c30</Color>
+    <Color x:Key="BgOnSurfaceVariant">#45464d</Color>
+    <Color x:Key="BgSurfaceContainerLowest">#ffffff</Color>
+    <Color x:Key="BgSurfaceContainerLow">#eff4ff</Color>
+    <Color x:Key="BgSurfaceContainerHigh">#dce9ff</Color>
+    <Color x:Key="BgSurfaceContainerHighest">#d3e4fe</Color>
+    <Color x:Key="BgOutlineVariant">#c6c6cd</Color>
+
 </ResourceDictionary>
