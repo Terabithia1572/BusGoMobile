@@ -11,4 +11,13 @@
     <x:String x:Key="IconArrowForward">&#xe5c8;</x:String>
     <x:String x:Key="IconHelp">&#xe8fd;</x:String>
 
+    <x:String x:Key="IconMail">&#xe158;</x:String>
+    <x:String x:Key="IconLock">&#xe897;</x:String>
+    <x:String x:Key="IconVisibility">&#xe8f4;</x:String>
+    <x:String x:Key="IconVisibilityOff">&#xe8f5;</x:String>
+    <x:String x:Key="IconInfo">&#xe88e;</x:String>
+    <x:String x:Key="IconVerifiedUser">&#xe8e8;</x:String>
+    <x:String x:Key="IconCheck">&#xe5ca;</x:String>
+
+
 </ResourceDictionary>
