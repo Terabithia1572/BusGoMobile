@@ -15,11 +15,14 @@ public class DatabaseService
         if (_db is not null)
             return;
 
-        // GEÇİCİ: Geliştirme için masaüstündeki sabit dosyaya bağlan.
-        // İleride proje içine gömülü dosyaya geçilecek.
         string targetPath = @"C:\Users\Yunus\Downloads\BusGoDb.db";
 
         _db = new SQLiteAsyncConnection(targetPath);
+
+        // Tablolar yoksa otomatik oluşturulmasını sağla:
+        await _db.CreateTableAsync<User>();
+        await _db.CreateTableAsync<Category>();
+        await _db.CreateTableAsync<City>();
 
         System.Diagnostics.Debug.WriteLine($"VERITABANI YOLU: {targetPath}");
     }
@@ -58,4 +61,22 @@ public class DatabaseService
 
         return results.FirstOrDefault();
     }
+
+    // Tüm kategorileri getir
+    public async Task<List<Category>> GetCategoriesAsync()
+    {
+        await InitAsync();
+
+        return await _db.QueryAsync<Category>("SELECT * FROM Category ORDER BY Id;");
+    }
+
+    // Tüm şehirleri getir
+    public async Task<List<City>> GetCitiesAsync()
+    {
+        await InitAsync();
+
+        return await _db.QueryAsync<City>("SELECT * FROM City ORDER BY Name;");
+    }
+
+
 }

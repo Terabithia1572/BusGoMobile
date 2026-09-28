@@ -74,44 +74,30 @@
                 </Grid>
 
                 <!-- Ulaşım türü sekmeleri (yatay kaydırma) -->
-                <ScrollView Orientation="Horizontal"
-                            HorizontalScrollBarVisibility="Never">
-                    <HorizontalStackLayout Spacing="8">
+                <!-- Ulaşım türü sekmeleri (veritabanından) -->
+                <CollectionView x:Name="CategoriesView"
+                                ItemsLayout="HorizontalList"
+                                HeightRequest="52">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeShape="RoundRectangle 20"
+                                    BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
+                                    Padding="14,10" Margin="0,0,8,0">
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label Text="{Binding IconGlyph}"
+                                           FontFamily="MaterialSymbols" FontSize="18"
+                                           TextColor="{StaticResource BgOnSurfaceVariant}"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding Name}"
+                                           FontFamily="InterRegular" FontSize="14"
+                                           TextColor="{StaticResource BgOnSurfaceVariant}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                        <Border StrokeShape="RoundRectangle 20"
-                                BackgroundColor="{StaticResource BgSecondaryContainer}"
-                                Padding="14,10">
-                            <Label Text="🚌 Otobüs"
-                                   FontSize="14" FontAttributes="Bold"
-                                   TextColor="{StaticResource BgOnSecondary}" />
-                        </Border>
-
-                        <Border StrokeShape="RoundRectangle 20"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="14,10">
-                            <Label Text="✈️ Uçak"
-                                   FontSize="14"
-                                   TextColor="{StaticResource BgOnSurfaceVariant}" />
-                        </Border>
-
-                        <Border StrokeShape="RoundRectangle 20"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="14,10">
-                            <Label Text="🏨 Otel"
-                                   FontSize="14"
-                                   TextColor="{StaticResource BgOnSurfaceVariant}" />
-                        </Border>
-
-                        <Border StrokeShape="RoundRectangle 20"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="14,10">
-                            <Label Text="🚗 Araç Kiralama"
-                                   FontSize="14"
-                                   TextColor="{StaticResource BgOnSurfaceVariant}" />
-                        </Border>
-
-                    </HorizontalStackLayout>
-                </ScrollView>
 
                 <!-- ARAMA KARTI -->
                 <Border StrokeShape="RoundRectangle 12"

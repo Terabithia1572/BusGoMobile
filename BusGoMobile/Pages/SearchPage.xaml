@@ -83,6 +83,7 @@
                                            TextColor="{StaticResource BgOnSurfaceVariant}" />
                                     <Picker x:Name="FromPicker"
                                             Title="Kalkış şehri seçin"
+                                            ItemDisplayBinding="{Binding DisplayName}"
                                             FontSize="14"
                                             TextColor="{StaticResource BgOnSurface}"
                                             TitleColor="{StaticResource BgOnSurfaceVariant}"
@@ -123,6 +124,7 @@
                                            TextColor="{StaticResource BgOnSurfaceVariant}" />
                                     <Picker x:Name="ToPicker"
                                             Title="Varış şehri seçin"
+                                            ItemDisplayBinding="{Binding DisplayName}"
                                             FontSize="14"
                                             TextColor="{StaticResource BgOnSurface}"
                                             TitleColor="{StaticResource BgOnSurfaceVariant}"
