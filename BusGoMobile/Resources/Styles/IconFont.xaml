@@ -32,6 +32,9 @@
     <x:String x:Key="IconVerified">&#xef76;</x:String>
     <x:String x:Key="IconConfirmationNumber">&#xe638;</x:String>
     <x:String x:Key="IconHistory">&#xe889;</x:String>
+    
+    
+    <x:String x:Key="IconFavorite">&#xe87d;</x:String>
 
 
 

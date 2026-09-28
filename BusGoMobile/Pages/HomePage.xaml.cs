@@ -8,7 +8,7 @@ public partial class HomePage : ContentPage
 
     public HomePage(DatabaseService db)
     {
-      //  InitializeComponent();
+       InitializeComponent();
         _db = db;
     }
 
