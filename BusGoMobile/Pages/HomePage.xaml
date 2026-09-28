@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BusGoMobile.Controls"
              x:Class="BusGoMobile.Pages.HomePage"
              BackgroundColor="{StaticResource BgSurface}"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- ÜST BAR (Header) -->
         <Grid Grid.Row="0"
@@ -412,6 +413,8 @@
 
             </VerticalStackLayout>
         </ScrollView>
+        <!-- ALT NAVBAR -->
+        <controls:BottomNavBar Grid.Row="2" ActiveTab="home" />
     </Grid>
 </ContentPage>
 
