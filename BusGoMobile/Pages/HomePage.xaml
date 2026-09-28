@@ -213,60 +213,8 @@
                     </ScrollView>
                 </VerticalStackLayout>
 
-                <!-- Son Aramalar -->
-                <VerticalStackLayout Spacing="8">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <Label Grid.Column="0" Text="Son Aramalar"
-                               FontFamily="InterBold" FontSize="17"
-                               TextColor="{StaticResource BgOnSurface}" />
-                        <Label Grid.Column="1" Text="Temizle"
-                               FontFamily="InterMedium" FontSize="12"
-                               TextColor="{StaticResource BgSecondary}"
-                               VerticalOptions="Center" />
-                    </Grid>
-                    <ScrollView Orientation="Horizontal"
-                                HorizontalScrollBarVisibility="Never">
-                        <HorizontalStackLayout Spacing="8">
-                            <Border StrokeShape="RoundRectangle 12"
-                                    BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                    Padding="8" WidthRequest="210">
-                                <VerticalStackLayout Spacing="4">
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label Grid.Column="0" Text="İstanbul → İzmir"
-                                               FontFamily="InterSemiBold" FontSize="14"
-                                               TextColor="{StaticResource BgOnSurface}" />
-                                        <Label Grid.Column="1" Text="{StaticResource IconHistory}"
-                                               FontFamily="MaterialSymbols" FontSize="16"
-                                               TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                    </Grid>
-                                    <Label Text="12 Ekim  •  1 Yolcu"
-                                           FontFamily="InterRegular" FontSize="12"
-                                           TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                </VerticalStackLayout>
-                            </Border>
-                            <Border StrokeShape="RoundRectangle 12"
-                                    BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                    Padding="8" WidthRequest="210">
-                                <VerticalStackLayout Spacing="4">
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label Grid.Column="0" Text="Ankara → Bursa"
-                                               FontFamily="InterSemiBold" FontSize="14"
-                                               TextColor="{StaticResource BgOnSurface}" />
-                                        <Label Grid.Column="1" Text="{StaticResource IconHistory}"
-                                               FontFamily="MaterialSymbols" FontSize="16"
-                                               TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                    </Grid>
-                                    <Label Text="5 Ekim  •  2 Yolcu"
-                                           FontFamily="InterRegular" FontSize="12"
-                                           TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                </VerticalStackLayout>
-                            </Border>
-                        </HorizontalStackLayout>
-                    </ScrollView>
-                </VerticalStackLayout>
-
-                <!-- Popüler Rotalar -->
-                <VerticalStackLayout Spacing="8">
+                <!-- Popüler Rotalar (yatay, premium kartlar) -->
+                <VerticalStackLayout Spacing="12">
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Grid.Column="0" Text="Popüler Rotalar"
                                FontFamily="InterBold" FontSize="17"
@@ -277,77 +225,188 @@
                                VerticalOptions="Center" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
-                          ColumnSpacing="8" RowSpacing="8">
+                    <ScrollView Orientation="Horizontal"
+                                HorizontalScrollBarVisibility="Never">
+                        <HorizontalStackLayout Spacing="12">
 
-                        <Border Grid.Row="0" Grid.Column="0"
-                                StrokeShape="RoundRectangle 12"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="8" HeightRequest="112">
-                            <Grid RowDefinitions="Auto,*,Auto">
-                                <Label Grid.Row="0" Text="İstanbul → Ankara"
-                                       FontFamily="InterSemiBold" FontSize="14"
-                                       TextColor="{StaticResource BgOnSurface}" />
-                                <Label Grid.Row="1" Text="Günlük 48 sefer"
-                                       FontFamily="InterRegular" FontSize="12"
-                                       TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                <Label Grid.Row="2" Text="450 TL"
-                                       FontFamily="InterBold" FontSize="17"
-                                       TextColor="{StaticResource BgSecondary}" />
-                            </Grid>
-                        </Border>
+                            <!-- Kart 1 -->
+                            <Border StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0"
+                                    WidthRequest="200" HeightRequest="150"
+                                    Padding="0">
+                                <Grid>
+                                    <Border StrokeShape="RoundRectangle 16" StrokeThickness="0">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="{StaticResource BgSecondaryContainer}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource BgSecondary}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Ellipse WidthRequest="120" HeightRequest="120"
+                                             Fill="White" Opacity="0.08"
+                                             HorizontalOptions="End" VerticalOptions="Start"
+                                             Margin="0,-40,-40,0" />
+                                    <Grid Padding="14" RowDefinitions="Auto,*,Auto">
+                                        <Label Grid.Row="0" Text="İstanbul → Ankara"
+                                               FontFamily="InterBold" FontSize="16"
+                                               TextColor="White" />
+                                        <Border Grid.Row="1"
+                                                StrokeShape="RoundRectangle 10"
+                                                BackgroundColor="#33FFFFFF"
+                                                Padding="8,3"
+                                                HorizontalOptions="Start" VerticalOptions="Start"
+                                                Margin="0,8,0,0">
+                                            <Label Text="Günlük 48 sefer"
+                                                   FontFamily="InterMedium" FontSize="11"
+                                                   TextColor="White" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Row="2" Spacing="0">
+                                            <Label Text="Başlangıç"
+                                                   FontFamily="InterRegular" FontSize="10"
+                                                   TextColor="White" Opacity="0.85" />
+                                            <Label Text="450 TL"
+                                                   FontFamily="InterExtraBold" FontSize="22"
+                                                   TextColor="White" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Border>
 
-                        <Border Grid.Row="0" Grid.Column="1"
-                                StrokeShape="RoundRectangle 12"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="8" HeightRequest="112">
-                            <Grid RowDefinitions="Auto,*,Auto">
-                                <Label Grid.Row="0" Text="İzmir → İstanbul"
-                                       FontFamily="InterSemiBold" FontSize="14"
-                                       TextColor="{StaticResource BgOnSurface}" />
-                                <Label Grid.Row="1" Text="Günlük 36 sefer"
-                                       FontFamily="InterRegular" FontSize="12"
-                                       TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                <Label Grid.Row="2" Text="550 TL"
-                                       FontFamily="InterBold" FontSize="17"
-                                       TextColor="{StaticResource BgSecondary}" />
-                            </Grid>
-                        </Border>
+                            <!-- Kart 2 -->
+                            <Border StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0"
+                                    WidthRequest="200" HeightRequest="150"
+                                    Padding="0">
+                                <Grid>
+                                    <Border StrokeShape="RoundRectangle 16" StrokeThickness="0">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="{StaticResource BgPrimary}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource BgInverseSurface}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Ellipse WidthRequest="120" HeightRequest="120"
+                                             Fill="White" Opacity="0.06"
+                                             HorizontalOptions="End" VerticalOptions="Start"
+                                             Margin="0,-40,-40,0" />
+                                    <Grid Padding="14" RowDefinitions="Auto,*,Auto">
+                                        <Label Grid.Row="0" Text="İzmir → İstanbul"
+                                               FontFamily="InterBold" FontSize="16"
+                                               TextColor="White" />
+                                        <Border Grid.Row="1"
+                                                StrokeShape="RoundRectangle 10"
+                                                BackgroundColor="#33FFFFFF"
+                                                Padding="8,3"
+                                                HorizontalOptions="Start" VerticalOptions="Start"
+                                                Margin="0,8,0,0">
+                                            <Label Text="Günlük 36 sefer"
+                                                   FontFamily="InterMedium" FontSize="11"
+                                                   TextColor="White" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Row="2" Spacing="0">
+                                            <Label Text="Başlangıç"
+                                                   FontFamily="InterRegular" FontSize="10"
+                                                   TextColor="White" Opacity="0.85" />
+                                            <Label Text="550 TL"
+                                                   FontFamily="InterExtraBold" FontSize="22"
+                                                   TextColor="White" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Border>
 
-                        <Border Grid.Row="1" Grid.Column="0"
-                                StrokeShape="RoundRectangle 12"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="8" HeightRequest="112">
-                            <Grid RowDefinitions="Auto,*,Auto">
-                                <Label Grid.Row="0" Text="Bursa → Antalya"
-                                       FontFamily="InterSemiBold" FontSize="14"
-                                       TextColor="{StaticResource BgOnSurface}" />
-                                <Label Grid.Row="1" Text="Günlük 22 sefer"
-                                       FontFamily="InterRegular" FontSize="12"
-                                       TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                <Label Grid.Row="2" Text="620 TL"
-                                       FontFamily="InterBold" FontSize="17"
-                                       TextColor="{StaticResource BgSecondary}" />
-                            </Grid>
-                        </Border>
+                            <!-- Kart 3 -->
+                            <Border StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0"
+                                    WidthRequest="200" HeightRequest="150"
+                                    Padding="0">
+                                <Grid>
+                                    <Border StrokeShape="RoundRectangle 16" StrokeThickness="0">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="{StaticResource BgSecondaryContainer}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource BgSecondary}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Ellipse WidthRequest="120" HeightRequest="120"
+                                             Fill="White" Opacity="0.08"
+                                             HorizontalOptions="End" VerticalOptions="Start"
+                                             Margin="0,-40,-40,0" />
+                                    <Grid Padding="14" RowDefinitions="Auto,*,Auto">
+                                        <Label Grid.Row="0" Text="Bursa → Antalya"
+                                               FontFamily="InterBold" FontSize="16"
+                                               TextColor="White" />
+                                        <Border Grid.Row="1"
+                                                StrokeShape="RoundRectangle 10"
+                                                BackgroundColor="#33FFFFFF"
+                                                Padding="8,3"
+                                                HorizontalOptions="Start" VerticalOptions="Start"
+                                                Margin="0,8,0,0">
+                                            <Label Text="Günlük 22 sefer"
+                                                   FontFamily="InterMedium" FontSize="11"
+                                                   TextColor="White" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Row="2" Spacing="0">
+                                            <Label Text="Başlangıç"
+                                                   FontFamily="InterRegular" FontSize="10"
+                                                   TextColor="White" Opacity="0.85" />
+                                            <Label Text="620 TL"
+                                                   FontFamily="InterExtraBold" FontSize="22"
+                                                   TextColor="White" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Border>
 
-                        <Border Grid.Row="1" Grid.Column="1"
-                                StrokeShape="RoundRectangle 12"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                                Padding="8" HeightRequest="112">
-                            <Grid RowDefinitions="Auto,*,Auto">
-                                <Label Grid.Row="0" Text="Ankara → Eskişehir"
-                                       FontFamily="InterSemiBold" FontSize="14"
-                                       TextColor="{StaticResource BgOnSurface}" />
-                                <Label Grid.Row="1" Text="Günlük 54 sefer"
-                                       FontFamily="InterRegular" FontSize="12"
-                                       TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                <Label Grid.Row="2" Text="180 TL"
-                                       FontFamily="InterBold" FontSize="17"
-                                       TextColor="{StaticResource BgSecondary}" />
-                            </Grid>
-                        </Border>
-                    </Grid>
+                            <!-- Kart 4 -->
+                            <Border StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0"
+                                    WidthRequest="200" HeightRequest="150"
+                                    Padding="0">
+                                <Grid>
+                                    <Border StrokeShape="RoundRectangle 16" StrokeThickness="0">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="{StaticResource BgPrimary}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource BgInverseSurface}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Ellipse WidthRequest="120" HeightRequest="120"
+                                             Fill="White" Opacity="0.06"
+                                             HorizontalOptions="End" VerticalOptions="Start"
+                                             Margin="0,-40,-40,0" />
+                                    <Grid Padding="14" RowDefinitions="Auto,*,Auto">
+                                        <Label Grid.Row="0" Text="Ankara → Eskişehir"
+                                               FontFamily="InterBold" FontSize="16"
+                                               TextColor="White" />
+                                        <Border Grid.Row="1"
+                                                StrokeShape="RoundRectangle 10"
+                                                BackgroundColor="#33FFFFFF"
+                                                Padding="8,3"
+                                                HorizontalOptions="Start" VerticalOptions="Start"
+                                                Margin="0,8,0,0">
+                                            <Label Text="Günlük 54 sefer"
+                                                   FontFamily="InterMedium" FontSize="11"
+                                                   TextColor="White" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Row="2" Spacing="0">
+                                            <Label Text="Başlangıç"
+                                                   FontFamily="InterRegular" FontSize="10"
+                                                   TextColor="White" Opacity="0.85" />
+                                            <Label Text="180 TL"
+                                                   FontFamily="InterExtraBold" FontSize="22"
+                                                   TextColor="White" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
                 </VerticalStackLayout>
 
                 <!-- Güven Bandı -->

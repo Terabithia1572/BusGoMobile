@@ -71,4 +71,6 @@
     <Color x:Key="BgEmeraldText">#047857</Color>
 
 
+    <Color x:Key="BgInverseSurface">#213145</Color>
+
 </ResourceDictionary>
