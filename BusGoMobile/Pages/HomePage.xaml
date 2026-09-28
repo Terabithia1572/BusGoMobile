@@ -100,109 +100,53 @@
                 </CollectionView>
 
 
-                <!-- ARAMA KARTI -->
-                <Border StrokeShape="RoundRectangle 12"
-                        BackgroundColor="{StaticResource BgSurfaceContainerLowest}"
-                        Padding="12">
-                    <VerticalStackLayout Spacing="12">
+                <!-- KAMPANYA SLIDER (veritabanından) -->
+                <VerticalStackLayout Spacing="8">
+                    <CarouselView x:Name="CampaignCarousel"
+                                  HeightRequest="150"
+                                  Loop="True"
+                                  IndicatorView="CampaignIndicator">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeShape="RoundRectangle 12"
+                                        StrokeThickness="0"
+                                        Margin="0,0,8,0">
+                                    <Grid>
+                                        <!-- Arka plan görseli -->
+                                        <Image Source="{Binding ImageName}"
+                                               Aspect="AspectFill" />
 
-                        <!-- Nereden -->
-                        <Border StrokeShape="RoundRectangle 8"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLow}"
-                                Padding="8">
-                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
-                                <Border Grid.Column="0"
-                                        WidthRequest="32" HeightRequest="32"
-                                        StrokeShape="RoundRectangle 16"
-                                        BackgroundColor="{StaticResource BgSurfaceContainerHighest}"
-                                        VerticalOptions="Center">
-                                    <Label Text="◎" FontSize="16"
-                                           TextColor="{StaticResource BgSecondary}"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center" />
+                                        <!-- Okunabilirlik için alt karartma -->
+                                        <BoxView VerticalOptions="End"
+                                                 HeightRequest="80"
+                                                 Color="Black"
+                                                 Opacity="0.35" />
+
+                                        <!-- Yazılar -->
+                                        <VerticalStackLayout VerticalOptions="End"
+                                                             Padding="14"
+                                                             Spacing="2">
+                                            <Label Text="{Binding Title}"
+                                                   FontFamily="InterBold" FontSize="17"
+                                                   TextColor="White" />
+                                            <Label Text="{Binding Subtitle}"
+                                                   FontFamily="InterRegular" FontSize="12"
+                                                   TextColor="White" />
+                                        </VerticalStackLayout>
+                                    </Grid>
                                 </Border>
-                                <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
-                                    <Label Text="NEREDEN"
-                                           FontSize="11"
-                                           TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                    <Label Text="İstanbul (Esenler)"
-                                           FontSize="14" FontAttributes="Bold"
-                                           TextColor="{StaticResource BgOnSurface}" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
 
-                        <!-- Nereye -->
-                        <Border StrokeShape="RoundRectangle 8"
-                                BackgroundColor="{StaticResource BgSurfaceContainerLow}"
-                                Padding="8">
-                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
-                                <Border Grid.Column="0"
-                                        WidthRequest="32" HeightRequest="32"
-                                        StrokeShape="RoundRectangle 16"
-                                        BackgroundColor="{StaticResource BgSurfaceContainerHighest}"
-                                        VerticalOptions="Center">
-                                    <Label Text="📍" FontSize="14"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center" />
-                                </Border>
-                                <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
-                                    <Label Text="NEREYE"
-                                           FontSize="11"
-                                           TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                    <Label Text="Ankara (AŞTİ)"
-                                           FontSize="14" FontAttributes="Bold"
-                                           TextColor="{StaticResource BgOnSurface}" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
+                    <!-- Noktalı gösterge -->
+                    <IndicatorView x:Name="CampaignIndicator"
+                                   IndicatorColor="{StaticResource BgSurfaceContainerHigh}"
+                                   SelectedIndicatorColor="{StaticResource BgSecondary}"
+                                   IndicatorSize="8"
+                                   HorizontalOptions="Center" />
+                </VerticalStackLayout>
 
-                        <!-- Tarih + Yolcu -->
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-
-                            <Border Grid.Column="0"
-                                    StrokeShape="RoundRectangle 8"
-                                    BackgroundColor="{StaticResource BgSurfaceContainerLow}"
-                                    Padding="8">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="📅 GİDİŞ TARİHİ"
-                                           FontSize="11"
-                                           TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                    <Label Text="18 Ekim Cuma"
-                                           FontSize="14" FontAttributes="Bold"
-                                           TextColor="{StaticResource BgOnSurface}" />
-                                </VerticalStackLayout>
-                            </Border>
-
-                            <Border Grid.Column="1"
-                                    StrokeShape="RoundRectangle 8"
-                                    BackgroundColor="{StaticResource BgSurfaceContainerLow}"
-                                    Padding="8">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="👤 YOLCU SAYISI"
-                                           FontSize="11"
-                                           TextColor="{StaticResource BgOnSurfaceVariant}" />
-                                    <Label Text="1 Yolcu"
-                                           FontSize="14" FontAttributes="Bold"
-                                           TextColor="{StaticResource BgOnSurface}" />
-                                </VerticalStackLayout>
-                            </Border>
-                        </Grid>
-
-                        <!-- Bilet Ara butonu -->
-                        <Border StrokeShape="RoundRectangle 12"
-                                BackgroundColor="{StaticResource BgSecondaryContainer}"
-                                Padding="0"
-                                HeightRequest="48">
-                            <Label Text="🔍  Bilet Ara  →"
-                                   FontSize="17" FontAttributes="Bold"
-                                   TextColor="{StaticResource BgOnSecondary}"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                        </Border>
-
-                    </VerticalStackLayout>
-                </Border>
 
                 <!-- Popüler Firmalar -->
                 <VerticalStackLayout Spacing="8">
