@@ -1,12 +1,37 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:BusGoMobile"
        xmlns:pages="clr-namespace:BusGoMobile.Pages"
-       x:Class="BusGoMobile.AppShell">
+       x:Class="BusGoMobile.AppShell"
+       FlyoutBehavior="Disabled">
 
+    <!-- ANA UYGULAMA (alt tab menülü) — şimdilik başlangıç burası -->
+    <TabBar Route="Main">
+        <Tab Title="Ana Sayfa">
+            <ShellContent
+                Route="HomePage"
+                ContentTemplate="{DataTemplate pages:HomePage}" />
+        </Tab>
+        <Tab Title="Biletlerim">
+            <ShellContent
+                Route="MyTripsPage"
+                ContentTemplate="{DataTemplate pages:MyTripsPage}" />
+        </Tab>
+        <Tab Title="Favoriler">
+            <ShellContent
+                Route="FavoritesPage"
+                ContentTemplate="{DataTemplate pages:FavoritesPage}" />
+        </Tab>
+        <Tab Title="Profil">
+            <ShellContent
+                Route="ProfilePage"
+                ContentTemplate="{DataTemplate pages:ProfilePage}" />
+        </Tab>
+    </TabBar>
+
+    <!-- GİRİŞ / KAYIT (şimdilik altta, sonra öne alacağız) -->
     <ShellContent
-        Title="Giriş"
-        ContentTemplate="{DataTemplate pages:SearchPage}"
-        Route="SearchPage" />
+        Route="LoginPage"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Shell.TabBarIsVisible="False" />
 
 </Shell>
