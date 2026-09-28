@@ -105,36 +105,38 @@
                     <CarouselView x:Name="CampaignCarousel"
                                   HeightRequest="150"
                                   Loop="True"
+                                  PeekAreaInsets="0"
                                   IndicatorView="CampaignIndicator">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <Border StrokeShape="RoundRectangle 12"
-                                        StrokeThickness="0"
-                                        Margin="0,0,8,0">
-                                    <Grid>
-                                        <!-- Arka plan görseli -->
-                                        <Image Source="{Binding ImageName}"
-                                               Aspect="AspectFill" />
+                                <Grid WidthRequest="{Binding Source={x:Reference CampaignCarousel}, Path=Width}">
+                                    <Border StrokeShape="RoundRectangle 12"
+                                            StrokeThickness="0">
+                                        <Grid>
+                                            <!-- Arka plan görseli -->
+                                            <Image Source="{Binding ImageName}"
+                                                   Aspect="AspectFill" />
 
-                                        <!-- Okunabilirlik için alt karartma -->
-                                        <BoxView VerticalOptions="End"
-                                                 HeightRequest="80"
-                                                 Color="Black"
-                                                 Opacity="0.35" />
+                                            <!-- Okunabilirlik için alt karartma -->
+                                            <BoxView VerticalOptions="End"
+                                                     HeightRequest="80"
+                                                     Color="Black"
+                                                     Opacity="0.35" />
 
-                                        <!-- Yazılar -->
-                                        <VerticalStackLayout VerticalOptions="End"
-                                                             Padding="14"
-                                                             Spacing="2">
-                                            <Label Text="{Binding Title}"
-                                                   FontFamily="InterBold" FontSize="17"
-                                                   TextColor="White" />
-                                            <Label Text="{Binding Subtitle}"
-                                                   FontFamily="InterRegular" FontSize="12"
-                                                   TextColor="White" />
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                </Border>
+                                            <!-- Yazılar -->
+                                            <VerticalStackLayout VerticalOptions="End"
+                                                                 Padding="14"
+                                                                 Spacing="2">
+                                                <Label Text="{Binding Title}"
+                                                       FontFamily="InterBold" FontSize="17"
+                                                       TextColor="White" />
+                                                <Label Text="{Binding Subtitle}"
+                                                       FontFamily="InterRegular" FontSize="12"
+                                                       TextColor="White" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>
@@ -146,6 +148,7 @@
                                    IndicatorSize="8"
                                    HorizontalOptions="Center" />
                 </VerticalStackLayout>
+
 
 
                 <!-- Popüler Firmalar -->
