@@ -35,6 +35,14 @@
     
     
     <x:String x:Key="IconFavorite">&#xe87d;</x:String>
+    
+    <x:String x:Key="IconTune">&#xe429;</x:String>
+    <x:String x:Key="IconArrowDownward">&#xe5db;</x:String>
+    <x:String x:Key="IconChair">&#xefe6;</x:String>
+    <x:String x:Key="IconSchedule">&#xe8b5;</x:String>
+    <x:String x:Key="IconExpandMore">&#xe5cf;</x:String>
+    <x:String x:Key="IconEditCalendar">&#xe742;</x:String>
+    
 
 
 

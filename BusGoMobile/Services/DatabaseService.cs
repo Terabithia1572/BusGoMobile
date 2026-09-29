@@ -84,6 +84,52 @@ public class DatabaseService
         return await _db.QueryAsync<Campaign>("SELECT * FROM Campaign ORDER BY Id;");
     }
 
+    // Belirli bir tarihteki seferleri getir (fiyata göre sıralı)
+    public async Task<List<Trip>> GetTripsAsync(string travelDate)
+    {
+        await InitAsync();
 
+        return await _db.QueryAsync<Trip>(
+            "SELECT * FROM Trip WHERE TravelDate = ? ORDER BY Price;",
+            travelDate);
+    }
+    // Tüm seferleri getir (test için)
+    public async Task<List<Trip>> GetAllTripsAsync()
+    {
+        await InitAsync();
+        return await _db.QueryAsync<Trip>("SELECT * FROM Trip ORDER BY Price;");
+    }
+
+    // Tüm seferleri, her birinin olanaklarıyla birlikte getir
+    public async Task<List<Trip>> GetAllTripsWithAmenitiesAsync()
+    {
+        await InitAsync();
+
+        // 1) Seferleri çek (fiyata göre sıralı)
+        var trips = await _db.QueryAsync<Trip>("SELECT * FROM Trip ORDER BY Price;");
+
+        if (trips.Count == 0)
+            return trips;
+
+        // 2) TÜM sefer-olanak eşleşmelerini tek sorguda çek (JOIN)
+        var rows = await _db.QueryAsync<TripAmenityRow>(
+            @"SELECT ta.TripId AS TripId, a.Name AS Name, a.IconCode AS IconCode
+              FROM TripAmenity ta
+              JOIN Amenity a ON a.Id = ta.AmenityId;");
+
+        // 3) Eşleşmeleri seferlere dağıt
+        foreach (var trip in trips)
+        {
+            trip.AmenityList = rows
+                .Where(r => r.TripId == trip.Id)
+                .Select(r => new Amenity { Name = r.Name, IconCode = r.IconCode })
+                .ToList();
+        }
+
+        // 4) En ucuz sefere işaret koy
+        trips[0].IsCheapest = true;
+
+        return trips;
+    }
 
 }
