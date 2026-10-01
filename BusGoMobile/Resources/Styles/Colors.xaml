@@ -73,4 +73,8 @@
 
     <Color x:Key="BgInverseSurface">#213145</Color>
 
+    <Color x:Key="BgError">#ba1a1a</Color>
+    <Color x:Key="BgErrorContainer">#ffdad6</Color>
+
+
 </ResourceDictionary>
