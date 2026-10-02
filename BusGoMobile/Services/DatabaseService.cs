@@ -131,5 +131,13 @@ public class DatabaseService
 
         return trips;
     }
+    public async Task<List<Seat>> GetSeatsAsync(int tripId)
+    {
+        await InitAsync();
+
+        return await _db.QueryAsync<Seat>(
+            "SELECT * FROM Seat WHERE TripId = ? ORDER BY Number;",
+            tripId);
+    }
 
 }

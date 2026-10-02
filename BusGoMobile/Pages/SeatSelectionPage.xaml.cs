@@ -1,56 +1,49 @@
 using BusGoMobile.Models;
+using BusGoMobile.Services;
 
 namespace BusGoMobile.Pages;
 
+[QueryProperty(nameof(TripId), "tripId")]
 public partial class SeatSelectionPage : ContentPage
 {
+    private readonly DatabaseService _db;
     private readonly List<Seat> _seats = new();
     private Seat _selectedSeat;
     private const int BasePrice = 520;
-    private const int ToplamKoltuk = 28;
 
-    // Başlangıçta dolu koltuklar (sabit): koltuk no -> cinsiyet
-    private readonly Dictionary<int, SeatStatus> _occupied = new()
-    {
-        { 1, SeatStatus.Female },
-        { 2, SeatStatus.Male },
-        { 3, SeatStatus.Male },
-        { 8, SeatStatus.Female },
-        { 12, SeatStatus.Male },
-        { 13, SeatStatus.Male },
-        { 17, SeatStatus.Male },
-        { 18, SeatStatus.Male },
-        { 19, SeatStatus.Female },
-        { 24, SeatStatus.Male },
-    };
+    public int TripId { get; set; }
 
-    public SeatSelectionPage()
+    public SeatSelectionPage(DatabaseService db)
     {
         InitializeComponent();
-        UretKoltuklar();
+        _db = db;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_seats.Count == 0)
+            await KoltuklariYukle();
+    }
+
+    private async Task KoltuklariYukle()
+    {
+        var dbSeats = await _db.GetSeatsAsync(TripId);
+
+        _seats.Clear();
+        _seats.AddRange(dbSeats);
+
         CizKoltuklar();
         OzetGuncelle();
     }
 
-    private void UretKoltuklar()
-    {
-        for (int i = 1; i <= ToplamKoltuk; i++)
-        {
-            _seats.Add(new Seat
-            {
-                Number = i,
-                Status = _occupied.ContainsKey(i) ? _occupied[i] : SeatStatus.Empty
-            });
-        }
-    }
-
-    // Bir koltuğun tipini döndür (sol tek / sağ pencere / sağ koridor / arka)
+    // Koltuk tipi (sol tek / sağ pencere / sağ koridor / arka)
     private string KoltukTipi(int number)
     {
-        // İlk 24 koltuk: 8 sıra × 3 (2+1). Son 4 (25-28): arka sıra
         if (number >= 25) return "Arka Koltuk";
 
-        int siraIcindeki = (number - 1) % 3; // 0=sol tek, 1=sağ pencere, 2=sağ koridor
+        int siraIcindeki = (number - 1) % 3;
         return siraIcindeki switch
         {
             0 => "Tekli Koltuk",
@@ -60,59 +53,74 @@ public partial class SeatSelectionPage : ContentPage
         };
     }
 
-    // Bir koltuğun 2+1 çiftindeki komşusunu bul (sadece sağ çift koltuklar için)
+    // 2+1 çiftteki komşu koltuk (cinsiyet kuralı için)
     private Seat CiftKomsu(int number)
     {
-        if (number >= 25) return null; // arka sıranın çift kuralı yok
+        if (number >= 25) return null;
 
         int siraIcindeki = (number - 1) % 3;
-        if (siraIcindeki == 1) return _seats.FirstOrDefault(s => s.Number == number + 1); // pencere -> koridor
-        if (siraIcindeki == 2) return _seats.FirstOrDefault(s => s.Number == number - 1); // koridor -> pencere
-        return null; // sol tek koltuğun çifti yok
+        if (siraIcindeki == 1) return _seats.FirstOrDefault(s => s.Number == number + 1);
+        if (siraIcindeki == 2) return _seats.FirstOrDefault(s => s.Number == number - 1);
+        return null;
     }
 
     private void CizKoltuklar()
     {
         SeatsContainer.Children.Clear();
 
-        // Ön kısım: 1-24 arası, 8 sıra 2+1
+        if (_seats.Count == 0)
+        {
+            SeatsContainer.Children.Add(new Label
+            {
+                Text = "Bu sefer için koltuk bilgisi bulunamadı.",
+                FontFamily = "InterRegular",
+                FontSize = 13,
+                TextColor = (Color)Application.Current.Resources["BgOnSurfaceVariant"],
+                HorizontalOptions = LayoutOptions.Center
+            });
+            return;
+        }
+
         int index = 0;
         int siraSayaci = 0;
 
-        while (index < 24)
+        // Ön kısım: ilk 24 koltuk, 8 sıra 2+1
+        while (index < 24 && index < _seats.Count)
         {
             var rowGrid = YeniSira();
 
-            // sol tek
             var sol = KoltukGorseli(_seats[index]);
             Grid.SetColumn(sol, 0);
             rowGrid.Children.Add(sol);
             index++;
 
-            // sağ pencere
-            var sag1 = KoltukGorseli(_seats[index]);
-            Grid.SetColumn(sag1, 2);
-            rowGrid.Children.Add(sag1);
-            index++;
+            if (index < _seats.Count)
+            {
+                var sag1 = KoltukGorseli(_seats[index]);
+                Grid.SetColumn(sag1, 2);
+                rowGrid.Children.Add(sag1);
+                index++;
+            }
 
-            // sağ koridor
-            var sag2 = KoltukGorseli(_seats[index]);
-            Grid.SetColumn(sag2, 3);
-            rowGrid.Children.Add(sag2);
-            index++;
+            if (index < _seats.Count)
+            {
+                var sag2 = KoltukGorseli(_seats[index]);
+                Grid.SetColumn(sag2, 3);
+                rowGrid.Children.Add(sag2);
+                index++;
+            }
 
             SeatsContainer.Children.Add(rowGrid);
             siraSayaci++;
 
-            // 4. sıradan sonra orta kapı bandı
             if (siraSayaci == 4)
                 SeatsContainer.Children.Add(OrtaKapiBandi());
         }
 
-        // Arka sıradan önce ikram/bagaj bilgisi
+        // Arka sıradan önce bilgi bandı
         SeatsContainer.Children.Add(BilgiBandi());
 
-        // Arka 4'lü sıra başlığı
+        // Arka 4'lü başlık
         SeatsContainer.Children.Add(new Label
         {
             Text = "ARKA 4'LÜ KOLTUK SIRASI",
@@ -122,7 +130,7 @@ public partial class SeatSelectionPage : ContentPage
             HorizontalOptions = LayoutOptions.Center
         });
 
-        // Arka 4'lü sıra (25-28)
+        // Arka 4'lü (25-28)
         var arkaGrid = new Grid
         {
             ColumnDefinitions =
@@ -134,11 +142,14 @@ public partial class SeatSelectionPage : ContentPage
             },
             ColumnSpacing = 8
         };
-        for (int i = 24; i < 28; i++)
+        int arkaSutun = 0;
+        while (index < _seats.Count)
         {
-            var koltuk = KoltukGorseli(_seats[i]);
-            Grid.SetColumn(koltuk, i - 24);
+            var koltuk = KoltukGorseli(_seats[index]);
+            Grid.SetColumn(koltuk, arkaSutun);
             arkaGrid.Children.Add(koltuk);
+            index++;
+            arkaSutun++;
         }
         SeatsContainer.Children.Add(arkaGrid);
     }
@@ -147,15 +158,14 @@ public partial class SeatSelectionPage : ContentPage
     {
         ColumnDefinitions =
         {
-            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }, // sol tek
-            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }, // koridor
-            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }, // sağ pencere
-            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }, // sağ koridor
+            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
         },
         ColumnSpacing = 8
     };
 
-    // Orta kapı & acil çıkış bandı
     private View OrtaKapiBandi()
     {
         var border = new Border
@@ -165,29 +175,17 @@ public partial class SeatSelectionPage : ContentPage
             BackgroundColor = (Color)Application.Current.Resources["BgSurfaceContainer"],
             Padding = new Thickness(10, 6)
         };
-        var grid = new Grid
+        border.Content = new Label
         {
-            ColumnDefinitions =
-            {
-                new ColumnDefinition { Width = GridLength.Auto },
-                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-            }
-        };
-        var sol = new Label
-        {
-            Text = "⛞  ORTA KAPI & ACİL ÇIKIŞ",
+            Text = "ORTA KAPI & ACİL ÇIKIŞ",
             FontFamily = "InterBold",
             FontSize = 11,
             TextColor = (Color)Application.Current.Resources["BgSecondary"],
-            VerticalOptions = LayoutOptions.Center
+            HorizontalOptions = LayoutOptions.Center
         };
-        Grid.SetColumn(sol, 0);
-        grid.Children.Add(sol);
-        border.Content = grid;
         return border;
     }
 
-    // İkram & WC / bagaj bilgi bandı
     private View BilgiBandi()
     {
         var border = new Border
@@ -234,9 +232,9 @@ public partial class SeatSelectionPage : ContentPage
             HorizontalOptions = LayoutOptions.Center
         });
 
-        if (seat.Status == SeatStatus.Male || seat.Status == SeatStatus.Female)
+        if (seat.StatusEnum == SeatStatus.Male || seat.StatusEnum == SeatStatus.Female)
         {
-            var iconKey = seat.Status == SeatStatus.Male ? "IconMan" : "IconWoman";
+            var iconKey = seat.StatusEnum == SeatStatus.Male ? "IconMan" : "IconWoman";
             content.Children.Add(new Label
             {
                 Text = (string)Application.Current.Resources[iconKey],
@@ -246,7 +244,7 @@ public partial class SeatSelectionPage : ContentPage
                 HorizontalOptions = LayoutOptions.Center
             });
         }
-        else if (seat.Status == SeatStatus.Selected)
+        else if (seat.StatusEnum == SeatStatus.Selected)
         {
             content.Children.Add(new Label
             {
@@ -260,17 +258,15 @@ public partial class SeatSelectionPage : ContentPage
 
         border.Content = content;
 
-        if (seat.IsSelectable)
-        {
-            var tap = new TapGestureRecognizer();
-            tap.Tapped += (s, e) => KoltugaTiklandi(seat);
-            border.GestureRecognizers.Add(tap);
-        }
+        // Her koltuğa tıklama (dolu olana da — kişiyi göstermek için)
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += (s, e) => KoltugaTiklandi(seat);
+        border.GestureRecognizers.Add(tap);
 
         return border;
     }
 
-    private Color KoltukRengi(Seat seat) => seat.Status switch
+    private Color KoltukRengi(Seat seat) => seat.StatusEnum switch
     {
         SeatStatus.Selected => (Color)Application.Current.Resources["BgSecondaryContainer"],
         SeatStatus.Male => (Color)Application.Current.Resources["BgSurfaceContainerHighest"],
@@ -278,7 +274,7 @@ public partial class SeatSelectionPage : ContentPage
         _ => (Color)Application.Current.Resources["BgSurfaceContainerLow"]
     };
 
-    private Color KoltukYaziRengi(Seat seat) => seat.Status switch
+    private Color KoltukYaziRengi(Seat seat) => seat.StatusEnum switch
     {
         SeatStatus.Selected => (Color)Application.Current.Resources["BgOnSecondary"],
         SeatStatus.Male => (Color)Application.Current.Resources["BgPrimary"],
@@ -288,32 +284,43 @@ public partial class SeatSelectionPage : ContentPage
 
     private async void KoltugaTiklandi(Seat seat)
     {
-        // Cinsiyet kuralı uyarısı: yanı dolu çift koltuk mu?
-        if (seat.Status == SeatStatus.Empty)
+        // Dolu koltuk: kişiyi göster, seçime izin verme
+        if (seat.StatusEnum == SeatStatus.Male || seat.StatusEnum == SeatStatus.Female)
+        {
+            string cinsiyet = seat.StatusEnum == SeatStatus.Female ? "Kadın" : "Erkek";
+            string isim = string.IsNullOrWhiteSpace(seat.PassengerName) ? "Bilinmiyor" : seat.PassengerName;
+
+            await DisplayAlert($"Koltuk {seat.Number}",
+                $"Yolcu: {isim}\nCinsiyet: {cinsiyet}",
+                "Kapat");
+            return;
+        }
+
+        // Boş koltuk: yanı dolu çift koltuk mu? (cinsiyet kuralı uyarısı)
+        if (seat.StatusEnum == SeatStatus.Empty)
         {
             var komsu = CiftKomsu(seat.Number);
-            if (komsu != null && (komsu.Status == SeatStatus.Male || komsu.Status == SeatStatus.Female))
+            if (komsu != null && (komsu.StatusEnum == SeatStatus.Male || komsu.StatusEnum == SeatStatus.Female))
             {
-                string cinsiyet = komsu.Status == SeatStatus.Female ? "kadın" : "erkek";
+                string cinsiyet = komsu.StatusEnum == SeatStatus.Female ? "kadın" : "erkek";
                 await DisplayAlert("Cinsiyet Kuralı",
-                    $"Yanınızdaki {komsu.Number} numaralı koltukta {cinsiyet} yolcu var. " +
-                    $"Bu koltuk yalnızca {cinsiyet} yolcu içindir.",
+                    $"Yanınızdaki {komsu.Number} numaralı koltukta {cinsiyet} yolcu var. Bu koltuk yalnızca {cinsiyet} yolcu içindir.",
                     "Anladım");
-                // Uyarı verdik ama yine de seçime izin veriyoruz
             }
         }
 
+        // Seçim mantığı
         if (_selectedSeat == seat)
         {
-            seat.Status = SeatStatus.Empty;
+            seat.StatusEnum = SeatStatus.Empty;
             _selectedSeat = null;
         }
         else
         {
             if (_selectedSeat != null)
-                _selectedSeat.Status = SeatStatus.Empty;
+                _selectedSeat.StatusEnum = SeatStatus.Empty;
 
-            seat.Status = SeatStatus.Selected;
+            seat.StatusEnum = SeatStatus.Selected;
             _selectedSeat = seat;
         }
 
@@ -323,8 +330,7 @@ public partial class SeatSelectionPage : ContentPage
 
     private void OzetGuncelle()
     {
-        // Kalan boş koltuk sayısı
-        int bos = _seats.Count(s => s.Status == SeatStatus.Empty);
+        int bos = _seats.Count(s => s.StatusEnum == SeatStatus.Empty);
         RemainingSeatsLabel.Text = $"{bos} boş koltuk";
 
         if (_selectedSeat == null)
