@@ -353,8 +353,9 @@ public partial class SeatSelectionPage : ContentPage
             return;
         }
 
-        await DisplayAlert("Seçim",
-            $"{_selectedSeat.Number} numaralı koltuk ({KoltukTipi(_selectedSeat.Number)}) seçildi. (Sonraki adım eklenecek.)",
-            "Tamam");
+        // Yolcu bilgileri sayfasına git: sefer + koltuk numarasını taşı
+        await Shell.Current.GoToAsync(
+            $"PassengerInfoPage?tripId={TripId}&seatNumber={_selectedSeat.Number}");
     }
+
 }

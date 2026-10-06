@@ -1,12 +1,42 @@
+
+using BusGoMobile.Models;
+using BusGoMobile.Services;
+
 namespace BusGoMobile.Pages;
 
+[QueryProperty(nameof(TripId), "tripId")]
+[QueryProperty(nameof(SeatNumber), "seatNumber")]
 public partial class PassengerInfoPage : ContentPage
 {
-    private string _gender = "Male"; // varsayılan
+    private readonly DatabaseService _db;
+    private string _gender = "Male";
+    private Trip _trip;
 
-    public PassengerInfoPage()
+    public int TripId { get; set; }
+    public int SeatNumber { get; set; }
+
+    public PassengerInfoPage(DatabaseService db)
     {
         InitializeComponent();
+        _db = db;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Seferi DB'den çek ve ekranı doldur
+        _trip = await _db.GetTripByIdAsync(TripId);
+
+        if (_trip != null)
+        {
+            CompanyLabel.Text = _trip.CompanyName;
+            RouteLabel.Text = $"{_trip.FromCity} → {_trip.ToCity}";
+            DateTimeLabel.Text = $"{_trip.TravelDate}, {_trip.DepartTime}";
+            PriceLabel.Text = _trip.Price.ToString();
+        }
+
+        SeatNumberLabel.Text = SeatNumber.ToString();
     }
 
     private void OnMaleTapped(object sender, TappedEventArgs e)
@@ -57,7 +87,7 @@ public partial class PassengerInfoPage : ContentPage
         }
 
         await DisplayAlert("Bilgiler Alındı",
-            $"{FirstNameEntry.Text} {LastNameEntry.Text} için ödeme adımına geçiliyor. (Ödeme sayfası sonra eklenecek.)",
+            $"{FirstNameEntry.Text} {LastNameEntry.Text} · Koltuk {SeatNumber} · {_gender}\nÖdeme adımına geçiliyor. (Ödeme sayfası sonra eklenecek.)",
             "Tamam");
     }
 
