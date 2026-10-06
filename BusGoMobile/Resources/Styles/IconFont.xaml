@@ -52,6 +52,11 @@
     <x:String x:Key="IconShieldPerson">&#xf0d9;</x:String>
     <x:String x:Key="IconMeetingRoom">&#xeb4f;</x:String>
 
+    <x:String x:Key="IconMale">&#xe58e;</x:String>
+    <x:String x:Key="IconFemale">&#xe590;</x:String>
+    <x:String x:Key="IconSeat">&#xe63f;</x:String>
+    <x:String x:Key="IconContactMail">&#xe0d0;</x:String>
+    <x:String x:Key="IconLock">&#xe897;</x:String>
 
 
 

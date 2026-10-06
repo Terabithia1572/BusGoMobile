@@ -7,7 +7,7 @@
     <!-- Başlangıç: HomePage (login'i sonra öne alacağız) -->
     <ShellContent
         Route="HomePage"
-        ContentTemplate="{DataTemplate pages:TripListPage}"
+        ContentTemplate="{DataTemplate pages:PassengerInfoPage}"
         Shell.TabBarIsVisible="False" />
 
     <ShellContent
