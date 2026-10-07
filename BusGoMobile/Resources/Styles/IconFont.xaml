@@ -56,7 +56,9 @@
     <x:String x:Key="IconFemale">&#xe590;</x:String>
     <x:String x:Key="IconSeat">&#xe63f;</x:String>
     <x:String x:Key="IconContactMail">&#xe0d0;</x:String>
-    
+    <x:String x:Key="IconCreditCard">&#xe870;</x:String>
+    <x:String x:Key="IconCalendarMonth">&#xebcc;</x:String>
+
 
 
 
