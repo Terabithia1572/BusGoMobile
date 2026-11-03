@@ -101,7 +101,8 @@ public partial class SplashPage : ContentPage
         if (_bitti) return;
         _bitti = true;
 
-        await Shell.Current.GoToAsync("//HomePage");
+        await Shell.Current.GoToAsync("//LoginPage");
     }
+
 }
 
